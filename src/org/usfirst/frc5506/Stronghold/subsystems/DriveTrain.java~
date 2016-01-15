@@ -13,10 +13,7 @@ package org.usfirst.frc5506.Stronghold.subsystems;
 
 import org.usfirst.frc5506.Stronghold.RobotMap;
 import org.usfirst.frc5506.Stronghold.commands.*;
-
-import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.CANTalon;
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotDrive;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -73,14 +70,6 @@ public class DriveTrain extends Subsystem {
      */
     public void drive(double forwardSpeed, double turningSpeed) {
     	motors.arcadeDrive(forwardSpeed, turningSpeed);
-    }
-    
-    public AnalogGyro getGyro() {
-    	return gyro;
-    }
-    
-    public Encoder getWheelRotations() {
-    	return wheelRotations;
     }
 }
 
