@@ -15,7 +15,7 @@ import org.usfirst.frc5506.Stronghold.RobotMap;
 import org.usfirst.frc5506.Stronghold.commands.*;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.RobotDrive;
-
+import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 
@@ -47,6 +47,24 @@ public class DriveTrain extends Subsystem {
 
         // Set the default command for a subsystem here.
         // setDefaultCommand(new MySpecialCommand());
+    }
+    public RobotDrive getMotors(){
+    	return motors;
+    }
+    
+    public SpeedController getLeftMotor(){
+    	return leftMotors;
+    }
+    
+    public SpeedController getRightMotor(){
+    	return rightMotors;
+    }
+    
+    /** alright welp most of this is Noah's code that I just modified.
+     * So if it doesn't work, don't ask me for help, 'cause I have no idea.
+     */
+    public void drive(double forwardSpeed, double turningSpeed) {
+    	motors.arcadeDrive(forwardSpeed, turningSpeed);
     }
 }
 
