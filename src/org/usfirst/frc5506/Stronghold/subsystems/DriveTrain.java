@@ -60,9 +60,6 @@ public class DriveTrain extends Subsystem {
     	return rightMotors;
     }
     
-    /** alright welp most of this is Noah's code that I just modified.
-     * So if it doesn't work, don't ask me for help, 'cause I have no idea.
-     */
     public void drive(double forwardSpeed, double turningSpeed) {
     	motors.arcadeDrive(forwardSpeed, turningSpeed);
     }
