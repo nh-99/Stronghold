@@ -42,6 +42,10 @@ public class DriveTeleop extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	double forwardSpeed = Robot.oi.getDriverJoystick().getY() * -1;
+    	double turningSpeed = Robot.oi.getDriverJoystick().getX() * -1;
+    	
+    	Robot.driveTrain.drive(forwardSpeed, turningSpeed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
