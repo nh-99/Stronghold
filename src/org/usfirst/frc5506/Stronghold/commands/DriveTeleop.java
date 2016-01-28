@@ -61,12 +61,19 @@ public class DriveTeleop extends Command {
     		return 1;
     	}
     }
+    
+    private double cos45 = Math.cos(Math.toRadians(45));
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	double joystickSpeed = Robot.oi.getDriverJoystick().getY() * -1;
     	double turningSpeed = Robot.oi.getDriverJoystick().getX() * -1;
     	if (Math.abs(joystickSpeed) >= 0.1) {
+    		if (Math.abs(joystickSpeed) >= Math.abs(turningSpeed)) {
+    			joystickSpeed = Math.sqrt((joystickSpeed * joystickSpeed) + (turningSpeed * turningSpeed));
+    		} else {
+    			joystickSpeed /= cos45;
+    		}
     		if (Math.abs(turningSpeed) >= 0.1) {
     			Robot.driveTrain.drive(stepCurve() * joystickSpeed, stepTurning() * turningSpeed);
     		} else {
