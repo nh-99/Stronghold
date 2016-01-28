@@ -39,13 +39,29 @@ public class DriveTeleop extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     }
+    
+    private double curveDuration = 25; // duration of curve in frames (frame = 20ms)
+    private double currentTime = 0;
+    
+    private double stepCurve() {
+    	if (currentTime < curveDuration) {
+    		currentTime++;
+    		return (currentTime / curveDuration) * (currentTime / curveDuration) * (currentTime / curveDuration);
+    	} else {
+    		return 1;
+    	}
+    }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double forwardSpeed = Robot.oi.getDriverJoystick().getY() * -1;
+    	double joystickSpeed = Robot.oi.getDriverJoystick().getY() * -1;
     	double turningSpeed = Robot.oi.getDriverJoystick().getX() * -1;
-    	
-    	Robot.driveTrain.drive(forwardSpeed, turningSpeed);
+    	if (Math.abs(joystickSpeed) >= 0.1) {
+    		Robot.driveTrain.drive(stepCurve() * joystickSpeed, turningSpeed);
+    	} else {
+    		currentTime = 0;
+    		Robot.driveTrain.drive(0, 0);
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
