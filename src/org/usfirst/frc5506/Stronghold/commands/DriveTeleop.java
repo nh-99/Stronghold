@@ -42,11 +42,21 @@ public class DriveTeleop extends Command {
     
     private double curveDuration = 25; // duration of curve in frames (frame = 20ms)
     private double currentTime = 0;
+    private double turningTime = 0;
     
-    private double stepCurve() {
+    private double stepCurve() { // returns multiplier between 0 and 1
     	if (currentTime < curveDuration) {
     		currentTime++;
     		return (currentTime / curveDuration) * (currentTime / curveDuration) * (currentTime / curveDuration);
+    	} else {
+    		return 1;
+    	}
+    }
+    
+    private double stepTurning() {
+    	if (turningTime < curveDuration) {
+    		turningTime++;
+    		return (turningTime / curveDuration) * (turningTime / curveDuration) * (turningTime / curveDuration);
     	} else {
     		return 1;
     	}
@@ -57,9 +67,15 @@ public class DriveTeleop extends Command {
     	double joystickSpeed = Robot.oi.getDriverJoystick().getY() * -1;
     	double turningSpeed = Robot.oi.getDriverJoystick().getX() * -1;
     	if (Math.abs(joystickSpeed) >= 0.1) {
-    		Robot.driveTrain.drive(stepCurve() * joystickSpeed, turningSpeed);
+    		if (Math.abs(turningSpeed) >= 0.1) {
+    			Robot.driveTrain.drive(stepCurve() * joystickSpeed, stepTurning() * turningSpeed);
+    		} else {
+    			turningTime = 0;
+    			Robot.driveTrain.drive(stepCurve() * joystickSpeed, 0);
+    		}
     	} else {
-    		currentTime = 0;
+    		currentTime = 0; // reset curves
+    		turningTime = 0;
     		Robot.driveTrain.drive(0, 0);
     	}
     }
