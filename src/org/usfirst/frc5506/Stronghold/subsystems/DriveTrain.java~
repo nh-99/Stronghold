@@ -13,9 +13,7 @@ package org.usfirst.frc5506.Stronghold.subsystems;
 
 import org.usfirst.frc5506.Stronghold.RobotMap;
 import org.usfirst.frc5506.Stronghold.commands.*;
-import edu.wpi.first.wpilibj.CANTalon;
-import edu.wpi.first.wpilibj.RobotDrive;
-import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 
@@ -63,6 +61,10 @@ public class DriveTrain extends Subsystem {
     
     public void drive(double forwardSpeed, double turningSpeed) {
     	motors.arcadeDrive(forwardSpeed, turningSpeed);
+    }
+    
+    public Encoder getEncoder() {
+    	return encoder;
     }
 }
 
