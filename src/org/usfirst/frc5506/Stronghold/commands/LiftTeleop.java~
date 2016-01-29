@@ -15,7 +15,10 @@ import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc5506.Stronghold.Robot;
 
 /**
- * @author Tupster24
+ *  @author Tupster24
+ *  
+ *  This class handles the fork lift during teleop.
+ *  Don't make other commands require "Lift" after teleop has started
  */
 public class LiftTeleop extends Command {
 
