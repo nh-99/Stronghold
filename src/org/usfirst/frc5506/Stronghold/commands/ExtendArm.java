@@ -46,7 +46,7 @@ public class ExtendArm extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.scalingArm.setExtendSpeed(0.5);
+    	Robot.scalingArm.extendArm(0.5);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -56,7 +56,7 @@ public class ExtendArm extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.scalingArm.setExtendSpeed(0);
+    	Robot.scalingArm.extendArm(0);
     }
 
     // Called when another command which requires one or more of the same
