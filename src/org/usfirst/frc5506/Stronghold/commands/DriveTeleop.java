@@ -45,6 +45,8 @@ public class DriveTeleop extends Command {
     protected void execute() {
     	double forwardSpeed = Robot.oi.getDriverJoystick().getY() * -1;
     	double turningSpeed = Robot.oi.getDriverJoystick().getX() * -1;
+    	
+    	// Driver joystick bindings
     	if(Math.abs(Robot.oi.getDriverJoystick().getX()) > Math.abs(Robot.oi.getDriverJoystick().getY())) {
         	Robot.oi.getDriverJoystick().setRumble(RumbleType.kLeftRumble, (float) Math.abs(Robot.oi.getDriverJoystick().getX()));
         	Robot.oi.getDriverJoystick().setRumble(RumbleType.kRightRumble, (float) Math.abs(Robot.oi.getDriverJoystick().getX()));
@@ -52,8 +54,12 @@ public class DriveTeleop extends Command {
         	Robot.oi.getDriverJoystick().setRumble(RumbleType.kLeftRumble, (float) Math.abs(Robot.oi.getDriverJoystick().getY()));
         	Robot.oi.getDriverJoystick().setRumble(RumbleType.kRightRumble, (float) Math.abs(Robot.oi.getDriverJoystick().getY()));
     	}
-    	
     	Robot.driveTrain.drive(forwardSpeed, turningSpeed);
+    	
+    	// Bind the Z-axis of the function joystick to the loader mechanism
+    	if(Math.abs(Robot.oi.getFunctionJoystick().getZ()) > 0.2) {
+    		Robot.loader.getMotor().set(Robot.oi.getFunctionJoystick().getZ());
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
