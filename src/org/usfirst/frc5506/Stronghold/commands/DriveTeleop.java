@@ -11,6 +11,8 @@
 
 package org.usfirst.frc5506.Stronghold.commands;
 
+import edu.wpi.first.wpilibj.GenericHID.Hand;
+import edu.wpi.first.wpilibj.Joystick.AxisType;
 import edu.wpi.first.wpilibj.Joystick.RumbleType;
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc5506.Stronghold.Robot;
@@ -56,9 +58,12 @@ public class DriveTeleop extends Command {
     	}
     	Robot.driveTrain.drive(forwardSpeed, turningSpeed);
     	
-    	// Bind the Z-axis of the function joystick to the loader mechanism
-    	if(Math.abs(Robot.oi.getFunctionJoystick().getZ()) > 0.2) {
-    		Robot.loader.getMotor().set(Robot.oi.getFunctionJoystick().getZ());
+    	if(Robot.oi.functionJoystick.getTrigger(Hand.kLeft)) {
+    		Robot.launcher.getMotor().set(-0.5);
+    	} else if(Robot.oi.functionJoystick.getTrigger(Hand.kRight)) {
+    		Robot.launcher.getMotor().set(0.5);
+    	} else {
+    		Robot.launcher.getMotor().set(0);
     	}
     }
 
