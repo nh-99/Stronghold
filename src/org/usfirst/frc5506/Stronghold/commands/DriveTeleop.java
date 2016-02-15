@@ -59,11 +59,11 @@ public class DriveTeleop extends Command {
     	Robot.driveTrain.drive(forwardSpeed, turningSpeed);
     	
     	if(Robot.oi.functionJoystick.getTrigger(Hand.kLeft)) {
-    		Robot.launcher.getMotor().set(-0.5);
+    		Robot.loader.getMotor().set(-0.5);
     	} else if(Robot.oi.functionJoystick.getTrigger(Hand.kRight)) {
-    		Robot.launcher.getMotor().set(0.5);
+    		Robot.loader.getMotor().set(0.5);
     	} else {
-    		Robot.launcher.getMotor().set(0);
+    		Robot.loader.getMotor().set(0);
     	}
     }
 
