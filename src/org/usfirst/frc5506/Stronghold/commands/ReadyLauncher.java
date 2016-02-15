@@ -44,7 +44,7 @@ public class ReadyLauncher extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.launcher.getMotor().set(m_launchVelocity);
+    	Robot.launcher.getLaunchingMotor().set(m_launchVelocity);
     }
 
     // Make this return true when this Command no longer needs to run execute()
