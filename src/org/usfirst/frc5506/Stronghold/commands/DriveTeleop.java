@@ -42,28 +42,51 @@ public class DriveTeleop extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     }
+    
+    private double curveDuration = 25; // duration of curve in frames (frame = 20ms)
+    private double currentTime = 0;
+    private double turningTime = 0;
+    
+    private double stepCurve() { // returns multiplier between 0 and 1
+    	if (currentTime < curveDuration) {
+    		currentTime++;
+    		return Math.pow(currentTime / curveDuration, 3);
+    	} else {
+    		return 1;
+    	}
+    }
+    
+    private double stepTurning() {
+    	if (turningTime < curveDuration) {
+    		turningTime++;
+    		return Math.pow(turningTime / curveDuration, 3);
+    	} else {
+    		return 1;
+    	}
+    }
+    
+    private double cos45 = Math.cos(Math.toRadians(45));
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double forwardSpeed = Robot.oi.getDriverJoystick().getY() * -1;
+    	double joystickSpeed = Robot.oi.getDriverJoystick().getY() * -1;
     	double turningSpeed = Robot.oi.getDriverJoystick().getX() * -1;
-    	
-    	// Driver joystick bindings
-    	if(Math.abs(Robot.oi.getDriverJoystick().getX()) > Math.abs(Robot.oi.getDriverJoystick().getY())) {
-        	Robot.oi.getDriverJoystick().setRumble(RumbleType.kLeftRumble, (float) Math.abs(Robot.oi.getDriverJoystick().getX()));
-        	Robot.oi.getDriverJoystick().setRumble(RumbleType.kRightRumble, (float) Math.abs(Robot.oi.getDriverJoystick().getX()));
+    	if (Math.abs(joystickSpeed) >= 0.1) {
+    		if (Math.abs(joystickSpeed) >= Math.abs(turningSpeed)) {
+    			joystickSpeed = Math.sqrt((joystickSpeed * joystickSpeed) + (turningSpeed * turningSpeed));
+    		} else {
+    			joystickSpeed /= cos45;
+    		}
+    		if (Math.abs(turningSpeed) >= 0.1) {
+    			Robot.driveTrain.drive(stepCurve() * joystickSpeed, stepTurning() * turningSpeed);
+    		} else {
+    			turningTime = 0;
+    			Robot.driveTrain.drive(stepCurve() * joystickSpeed, 0);
+    		}
     	} else {
-        	Robot.oi.getDriverJoystick().setRumble(RumbleType.kLeftRumble, (float) Math.abs(Robot.oi.getDriverJoystick().getY()));
-        	Robot.oi.getDriverJoystick().setRumble(RumbleType.kRightRumble, (float) Math.abs(Robot.oi.getDriverJoystick().getY()));
-    	}
-    	Robot.driveTrain.drive(forwardSpeed, turningSpeed);
-    	
-    	if(Robot.oi.functionJoystick.getTrigger(Hand.kLeft)) {
-    		Robot.loader.getMotor().set(-0.5);
-    	} else if(Robot.oi.functionJoystick.getTrigger(Hand.kRight)) {
-    		Robot.loader.getMotor().set(0.5);
-    	} else {
-    		Robot.loader.getMotor().set(0);
+    		currentTime = 0; // reset curves
+    		turningTime = 0;
+    		Robot.driveTrain.drive(0, 0);
     	}
     }
 
