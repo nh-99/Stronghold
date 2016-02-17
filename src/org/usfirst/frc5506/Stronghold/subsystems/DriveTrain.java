@@ -54,5 +54,18 @@ public class DriveTrain extends Subsystem {
     public void drive(double turningSpeed, double forwardSpeed) {
     	motors.arcadeDrive(forwardSpeed, turningSpeed);
     }
+    
+    public void driveLeft(double speed) {
+    	leftMotors.set(speed);
+    }
+    
+    public void driveRight(double speed) {
+    	rightMotors.set(speed);
+    }
+    
+    public void stop() {
+    	leftMotors.set(0);
+    	rightMotors.set(0);
+    }
 }
 
