@@ -123,7 +123,7 @@ Children:
           validators: [CANID]
           value: '0'
       Base: CAN Talon
-      Name: launchingMotor
+      Name: winchMotor
     - Children: []
       Properties:
         Type: !!robotbuilder.data.properties.ChoicesProperty
@@ -137,7 +137,7 @@ Children:
           default: '0'
           name: Output Channel (PWM)
           validators: *id003
-          value: '2'
+          value: '5'
       Base: Speed Controller
       Name: releaseMotor
     Properties:
@@ -280,7 +280,7 @@ Children:
   Base: Commands
   Name: Commands
 Properties:
-  Eclipse Workspace: !!robotbuilder.data.properties.FileProperty {default: 'C:\Users\Robotics\workspace',
+  Eclipse Workspace: !!robotbuilder.data.properties.FileProperty {default: /Users/student/workspace,
     extension: null, folder: true, name: Eclipse Workspace, validators: null, value: ../}
   Export Commands: !!robotbuilder.data.properties.BooleanProperty {default: true,
     name: Export Commands, validators: null, value: true}
@@ -299,7 +299,7 @@ Properties:
     name: Export Subsystems, validators: null, value: true}
   Simulation World File: !!robotbuilder.data.properties.StringProperty {default: /usr/share/frcsim/worlds/GearsBotDemo.world,
     name: Simulation World File, validators: null, value: /usr/share/frcsim/worlds/GearsBotDemo.world}
-  Wiring file location: !!robotbuilder.data.properties.FileProperty {default: 'C:\Users\Robotics\',
+  Wiring file location: !!robotbuilder.data.properties.FileProperty {default: /Users/student/,
     extension: null, folder: true, name: Wiring file location, validators: null, value: ./}
   Autonomous Command: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
     name: Autonomous Command, type: Command, validators: null, value: Autonomous Command}
