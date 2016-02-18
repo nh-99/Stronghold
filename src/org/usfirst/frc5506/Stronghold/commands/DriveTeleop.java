@@ -128,7 +128,7 @@ public class DriveTeleop extends Command {
     	//KAT_MAN123 Wuz H3rE!!
     	double liftSpeed = (Robot.oi.getDriverJoystick().getRawAxis(3) - Robot.oi.getDriverJoystick().getRawAxis(2));
     	if (Math.abs(liftSpeed) < threshold) {
-    		liftSpeed = 0.3;
+    		liftSpeed = 0.03;
     	} else if (liftSpeed < 0) { // slow down speed if moving up
     		liftSpeed *= 0.25;
     	}
