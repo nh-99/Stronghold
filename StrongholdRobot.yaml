@@ -72,7 +72,7 @@ Children:
         validators: null
         value: []
       Default Command: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
-        name: Default Command, type: Command, validators: null, value: DriveTeleop}
+        name: Default Command, type: Command, validators: null, value: Teleop}
       Constants: !!robotbuilder.data.properties.ConstantsProperty
         default: []
         name: Constants
@@ -329,7 +329,7 @@ Children:
           command:
             base: *id008
             name: LauncherTeleop
-            properties: &id010
+            properties: &id009
               Parameters: !!robotbuilder.data.properties.ParametersProperty
                 default: []
                 name: Parameters
@@ -356,7 +356,7 @@ Children:
           command:
             base: *id008
             name: LoaderTeleop
-            properties: &id011
+            properties: &id010
               Parameters: !!robotbuilder.data.properties.ParametersProperty
                 default: []
                 name: Parameters
@@ -365,10 +365,10 @@ Children:
               Requires: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
                 name: Requires, type: Subsystem, validators: null, value: Loader}
               Parameter presets: !!robotbuilder.data.properties.ParameterSetProperty
-                default: &id009 []
+                default: []
                 name: Parameter presets
                 validators: null
-                value: *id009
+                value: []
               Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {
                 default: true, name: Button on SmartDashboard, validators: null, value: true}
           hasMatch: true
@@ -384,11 +384,11 @@ Children:
     Base: Command Group
     Name: Teleop
   - Children: []
-    Properties: *id010
+    Properties: *id009
     Base: Command
     Name: LauncherTeleop
   - Children: []
-    Properties: *id011
+    Properties: *id010
     Base: Command
     Name: LoaderTeleop
   Properties: {}
