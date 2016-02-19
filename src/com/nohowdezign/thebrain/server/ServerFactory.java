@@ -30,7 +30,7 @@ public abstract class ServerFactory {
 		}
 	}
 	
-	public void run() throws IOException {
+	public void runServer() throws IOException {
 		this.initialize();
 		this.start();
 	}
