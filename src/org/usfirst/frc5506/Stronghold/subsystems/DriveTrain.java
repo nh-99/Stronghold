@@ -15,7 +15,6 @@ import org.usfirst.frc5506.Stronghold.RobotMap;
 import org.usfirst.frc5506.Stronghold.commands.*;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SpeedController;
-import edu.wpi.first.wpilibj.Victor;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 

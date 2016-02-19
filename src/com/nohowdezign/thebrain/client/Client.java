@@ -12,7 +12,7 @@ public class Client {
 	    try {
 	       InetAddress host = InetAddress.getByName(hostIp);
 	       socket = new DatagramSocket();
-           byte [] data = message.getBytes(); // To start the VT: "{\"command\":\"Autonomous\",\"image\":\"asdf\"}"
+           byte [] data = message.getBytes();
            DatagramPacket packet = new DatagramPacket(data, data.length, host, port);
 	       socket.send(packet);
 	    } catch(Exception e) {
