@@ -43,8 +43,8 @@ public class LoaderTeleop extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double liftSpeed = (Robot.oi.getFunctionJoystick().getRawAxis(0) - Robot.oi.getFunctionJoystick().getRawAxis(1));
-    	if (liftSpeed < minimumInput)
+    	double liftSpeed = Robot.oi.getFunctionJoystick().getRawAxis(1);
+    	if (Math.abs(liftSpeed) < minimumInput)
     		liftSpeed = (Robot.oi.getDriverJoystick().getRawAxis(3) - Robot.oi.getDriverJoystick().getRawAxis(2));
     	if (Math.abs(liftSpeed) < minimumInput) {
     		liftSpeed = 0;
