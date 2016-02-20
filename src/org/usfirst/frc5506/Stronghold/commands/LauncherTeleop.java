@@ -46,16 +46,14 @@ public class LauncherTeleop extends Command {
     	boolean b = Robot.oi.getFunctionJoystick().getRawButton(4);
     	double winchSpeed = 0;
     	if (Robot.oi.getFunctionJoystick().getRawButton(1))
-    		Robot.launcher.getReleaseMotor().set(0.1);
-    	else if (Robot.oi.getFunctionJoystick().getRawButton(2))
-    		Robot.launcher.getReleaseMotor().set(-0.1);
+    		Robot.launcher.getReleaseMotor().set(0.3);
     	else
     		Robot.launcher.getReleaseMotor().set(0);
     	if (a) {
-    		winchSpeed -= 0.1;
+    		winchSpeed -= 0.6;
     	}
     	if (b) {
-    		winchSpeed += 0.1;
+    		winchSpeed += 0.6;
     	}
     	
     	Robot.launcher.getLaunchingMotor().set(winchSpeed);
