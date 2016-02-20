@@ -38,8 +38,8 @@ public class LauncherTeleop extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	boolean a = Robot.oi.getDriverJoystick().getRawButton(1);
-    	boolean b = Robot.oi.getDriverJoystick().getRawButton(2);
+    	boolean a = Robot.oi.getFunctionJoystick().getRawButton(1);
+    	boolean b = Robot.oi.getFunctionJoystick().getRawButton(2);
     	double winchSpeed = 0;
     	if (a) {
     		winchSpeed -= 1;
