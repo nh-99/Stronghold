@@ -12,7 +12,6 @@
 package org.usfirst.frc5506.Stronghold.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import org.usfirst.frc5506.Stronghold.subsystems.*;
 
 /**
  *

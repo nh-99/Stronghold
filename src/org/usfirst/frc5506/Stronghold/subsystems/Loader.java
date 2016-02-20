@@ -12,8 +12,6 @@
 package org.usfirst.frc5506.Stronghold.subsystems;
 
 import org.usfirst.frc5506.Stronghold.RobotMap;
-import org.usfirst.frc5506.Stronghold.commands.*;
-import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.SpeedController;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
