@@ -24,6 +24,7 @@
   <property file="${user.home}/wpilib/wpilib.properties"/>
   <property file="build.properties"/>
   <property file="${user.home}/wpilib/java/${version}/ant/build.properties"/>
+  <property name="classpath" value="libs/wpilib.jar:libs/networktables.jar:libs/fastjson-1.2.7.jar" />
 
   <import file="${wpilib.ant.dir}/build.xml"/>
 
