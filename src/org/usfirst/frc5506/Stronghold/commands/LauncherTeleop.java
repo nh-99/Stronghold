@@ -42,6 +42,10 @@ public class LauncherTeleop extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	if (Robot.oi.getFunctionJoystick().getRawButton(1))
+    		Robot.launcher.getReleaseMotor().set(0.2);
+    	else
+    		Robot.launcher.getReleaseMotor().set(0);
     	boolean a = Robot.oi.getFunctionJoystick().getRawButton(5);
     	boolean b = Robot.oi.getFunctionJoystick().getRawButton(3);
     	double winchSpeed = 0;

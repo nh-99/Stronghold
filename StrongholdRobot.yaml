@@ -205,7 +205,7 @@ Children:
           default: '0'
           name: Output Channel (PWM)
           validators: *id003
-          value: '2'
+          value: '3'
       Base: Speed Controller
       Name: turretMotor
     - Children: []
@@ -221,7 +221,7 @@ Children:
           default: '0'
           name: Output Channel (PWM)
           validators: *id003
-          value: '3'
+          value: '2'
       Base: Speed Controller
       Name: extendMotor
     Properties:
@@ -357,7 +357,7 @@ Children:
       Commands: !!robotbuilder.data.properties.ListProperty
         default: []
         name: Commands
-        validators: &id011 [List]
+        validators: &id012 [List]
         value:
         - !!robotbuilder.data.CommandGroupEntry
           command:
@@ -395,7 +395,7 @@ Children:
           command:
             base: *id008
             name: LauncherTeleop
-            properties: &id009
+            properties: &id010
               Parameters: !!robotbuilder.data.properties.ParametersProperty
                 default: []
                 name: Parameters
@@ -422,7 +422,7 @@ Children:
           command:
             base: *id008
             name: LoaderTeleop
-            properties: &id010
+            properties: &id011
               Parameters: !!robotbuilder.data.properties.ParametersProperty
                 default: []
                 name: Parameters
@@ -445,16 +445,43 @@ Children:
             validators: null
             value: []
           previous: null
+        - !!robotbuilder.data.CommandGroupEntry
+          command:
+            base: *id008
+            name: ScalingTeleop
+            properties: &id013
+              Parameters: !!robotbuilder.data.properties.ParametersProperty
+                default: []
+                name: Parameters
+                validators: null
+                value: []
+              Requires: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
+                name: Requires, type: Subsystem, validators: null, value: ScalingArm}
+              Parameter presets: !!robotbuilder.data.properties.ParameterSetProperty
+                default: &id009 []
+                name: Parameter presets
+                validators: null
+                value: *id009
+              Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {
+                default: true, name: Button on SmartDashboard, validators: null, value: true}
+          hasMatch: true
+          order: Parallel
+          parameters:
+            default: []
+            name: ParametersProperty
+            validators: null
+            value: []
+          previous: null
       Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
         name: Button on SmartDashboard, validators: null, value: true}
     Base: Command Group
     Name: Teleop
   - Children: []
-    Properties: *id009
+    Properties: *id010
     Base: Command
     Name: LauncherTeleop
   - Children: []
-    Properties: *id010
+    Properties: *id011
     Base: Command
     Name: LoaderTeleop
   - Children: []
@@ -472,7 +499,7 @@ Children:
       Commands: !!robotbuilder.data.properties.ListProperty
         default: []
         name: Commands
-        validators: *id011
+        validators: *id012
         value: []
       Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
         name: Button on SmartDashboard, validators: null, value: true}
@@ -496,6 +523,10 @@ Children:
         name: Button on SmartDashboard, validators: null, value: true}
     Base: Command
     Name: DriveAuto
+  - Children: []
+    Properties: *id013
+    Base: Command
+    Name: ScalingTeleop
   Properties: {}
   Base: Commands
   Name: Commands

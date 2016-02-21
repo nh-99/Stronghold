@@ -73,10 +73,10 @@ public class RobotMap {
         LiveWindow.addSensor("Launcher", "winchRotations", launcherwinchRotations);
         launcherwinchRotations.setDistancePerPulse(1.0);
         launcherwinchRotations.setPIDSourceType(PIDSourceType.kRate);
-        scalingArmturretMotor = new VictorSP(2);
+        scalingArmturretMotor = new VictorSP(3);
         LiveWindow.addActuator("ScalingArm", "turretMotor", (VictorSP) scalingArmturretMotor);
         
-        scalingArmextendMotor = new VictorSP(3);
+        scalingArmextendMotor = new VictorSP(2);
         LiveWindow.addActuator("ScalingArm", "extendMotor", (VictorSP) scalingArmextendMotor);
         
 
