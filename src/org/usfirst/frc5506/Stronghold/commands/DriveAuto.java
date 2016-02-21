@@ -53,7 +53,7 @@ public class DriveAuto extends Command {
     	this.server = Robot.robotServer;
     	distanceToFire = rangeMin + (rangeMax - rangeMin) * new Random().nextDouble();
     	Client client = new Client();
-    	client.send("{\"command\":\"Autonomous\"}", "localhost", 5000);
+    	client.send("{\"command\":\"Autonomous\"}", "10.55.6.43", 5000);
     }
 
     // Called repeatedly when this Command is scheduled to run

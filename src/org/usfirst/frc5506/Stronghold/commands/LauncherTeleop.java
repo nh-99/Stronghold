@@ -50,10 +50,10 @@ public class LauncherTeleop extends Command {
     	else
     		Robot.launcher.getReleaseMotor().set(0);
     	if (a) {
-    		winchSpeed -= 0.6;
+    		winchSpeed -= 1;
     	}
     	if (b) {
-    		winchSpeed += 0.6;
+    		winchSpeed += 1;
     	}
     	
     	Robot.launcher.getLaunchingMotor().set(winchSpeed);
