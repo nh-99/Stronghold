@@ -50,7 +50,7 @@ public class DriveTeleop extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if (rumbleTime > 0)
+    	/*if (rumbleTime > 0)
     		rumbleTime--;
     	if (Robot.oi.getDriverJoystick().getRawButton(9) && Robot.oi.getDriverJoystick().getRawButton(10)) {
     		holdTime++;
@@ -61,9 +61,9 @@ public class DriveTeleop extends Command {
     		usingTankDrive = !usingTankDrive;
     		rumbleTime = responseDuration;
     	}
-    	if (usingTankDrive) {
-	    	float leftSpeed = (float) Robot.oi.getDriverJoystick().getRawAxis(1);
-	    	float rightSpeed = (float) Robot.oi.getDriverJoystick().getRawAxis(5);
+    	if (usingTankDrive) {*/
+	    	float leftSpeed = (float) (Robot.oi.getDriverJoystick().getRawAxis(1) * 0.65);
+	    	float rightSpeed = (float) (Robot.oi.getDriverJoystick().getRawAxis(5) * 0.65);
 	    	//tankDrive(leftSpeed, rightSpeed);
 	    	//if (Math.abs(leftSpeed) >= minimumInput) {
 	    		Robot.driveTrain.driveLeft(leftSpeed);
@@ -79,9 +79,9 @@ public class DriveTeleop extends Command {
 	    	//	Robot.driveTrain.driveRight(0);
 	    	//	rumble(Robot.oi.getDriverJoystick(), false, 0);
 	    	//}
-    	} else {
-        	arcadeDrive();
-    	}
+    	//} else {
+        //	arcadeDrive();
+    	//}
     }
 
     // Make this return true when this Command no longer needs to run execute()
