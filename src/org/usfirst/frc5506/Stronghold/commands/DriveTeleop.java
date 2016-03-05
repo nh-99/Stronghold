@@ -23,6 +23,12 @@ public class DriveTeleop extends Command {
 	public boolean usingTankDrive = true;
 	public double holdTime = 0;
 	public double rumbleTime = 0;
+	public boolean useHighPower = false;
+	public boolean aPressed = false;
+	public double highPower = -0.75;
+	public double lowPower = -0.4;
+	public double power = lowPower;
+	public boolean wasPressed = false;
 	
 	public double minimumInput = 0.03; // The joystick has a slight margin of error, never perfectly at 0
 	public byte requiredHoldTime = 50; // How long (x20ms) you need to hold down the buttons to switch drive mode
@@ -50,7 +56,7 @@ public class DriveTeleop extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	/*if (rumbleTime > 0)
+    	if (rumbleTime > 0)
     		rumbleTime--;
     	if (Robot.oi.getDriverJoystick().getRawButton(9) && Robot.oi.getDriverJoystick().getRawButton(10)) {
     		holdTime++;
@@ -61,27 +67,41 @@ public class DriveTeleop extends Command {
     		usingTankDrive = !usingTankDrive;
     		rumbleTime = responseDuration;
     	}
-    	if (usingTankDrive) {*/
-	    	float leftSpeed = (float) (Robot.oi.getDriverJoystick().getRawAxis(1) * 0.65);
-	    	float rightSpeed = (float) (Robot.oi.getDriverJoystick().getRawAxis(5) * 0.65);
-	    	//tankDrive(leftSpeed, rightSpeed);
-	    	//if (Math.abs(leftSpeed) >= minimumInput) {
+    	if (Robot.oi.getDriverJoystick().getRawButton(1) && !aPressed) {
+    		aPressed = true;
+    		if (wasPressed) {
+    			wasPressed = false;
+	    		useHighPower = !useHighPower;
+	    		if (useHighPower)
+	    			power = highPower;
+	    		else
+	    			power = lowPower;
+    		} else
+    			wasPressed = true;
+    	}
+    	if (aPressed && !Robot.oi.getDriverJoystick().getRawButton(1))
+    		aPressed = false;
+    	if (usingTankDrive) {
+	    	float leftSpeed = (float) (Robot.oi.getDriverJoystick().getRawAxis(1) * -power);
+	    	float rightSpeed = (float) (Robot.oi.getDriverJoystick().getRawAxis(5) * -power);
+	    	tankDrive(leftSpeed, rightSpeed);
+	    	if (Math.abs(leftSpeed) >= minimumInput) {
 	    		Robot.driveTrain.driveLeft(leftSpeed);
-	    		//rumble(Robot.oi.getDriverJoystick(), true, Math.abs(leftSpeed));
-	    	//} else {
-	    	//	Robot.driveTrain.driveLeft(0);
-	    	//	rumble(Robot.oi.getDriverJoystick(), true, 0);
-	    	//}
-	    	//if(Math.abs(rightSpeed) >= minimumInput) {
+	    		rumble(Robot.oi.getDriverJoystick(), true, Math.abs(leftSpeed));
+	    	} else {
+	    		Robot.driveTrain.driveLeft(0);
+	    		rumble(Robot.oi.getDriverJoystick(), true, 0);
+	    	}
+	    	if(Math.abs(rightSpeed) >= minimumInput) {
 	    		Robot.driveTrain.driveRight(rightSpeed);
-	    		//rumble(Robot.oi.getDriverJoystick(), false, Math.abs(rightSpeed));
-	    	//} else {
-	    	//	Robot.driveTrain.driveRight(0);
-	    	//	rumble(Robot.oi.getDriverJoystick(), false, 0);
-	    	//}
-    	//} else {
-        //	arcadeDrive();
-    	//}
+	    		rumble(Robot.oi.getDriverJoystick(), false, Math.abs(rightSpeed));
+	    	} else {
+	    		Robot.driveTrain.driveRight(0);
+	    		rumble(Robot.oi.getDriverJoystick(), false, 0);
+	    	}
+    	} else {
+        	arcadeDrive();
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -105,25 +125,25 @@ public class DriveTeleop extends Command {
      * @param rightSpeed y-axis of right joystick
      */
     private void tankDrive(float leftSpeed, float rightSpeed) {
-    	//if (Math.abs(leftSpeed) >= minimumInput) {
+    	if (Math.abs(leftSpeed) >= minimumInput) {
     		Robot.driveTrain.driveLeft(leftSpeed);
     		rumble(Robot.oi.getDriverJoystick(), true, Math.abs(leftSpeed));
-    	//} else {
-    	//	Robot.driveTrain.driveLeft(0);
-    	//	rumble(Robot.oi.getDriverJoystick(), true, 0);
-    	//}
-    	//if(Math.abs(rightSpeed) >= minimumInput) {
+    	} else {
+    		Robot.driveTrain.driveLeft(0);
+    		rumble(Robot.oi.getDriverJoystick(), true, 0);
+    	}
+    	if(Math.abs(rightSpeed) >= minimumInput) {
     		Robot.driveTrain.driveRight(rightSpeed);
     		rumble(Robot.oi.getDriverJoystick(), false, Math.abs(rightSpeed));
-    	//} else {
-    	//	Robot.driveTrain.driveRight(0);
-    	//	rumble(Robot.oi.getDriverJoystick(), false, 0);
-    	//}
+    	} else {
+    		Robot.driveTrain.driveRight(0);
+    		rumble(Robot.oi.getDriverJoystick(), false, 0);
+    	}
     }
     
     private void arcadeDrive() {
-    	double forwardSpeed = Robot.oi.getDriverJoystick().getY() * -1;
-    	double turningSpeed = Robot.oi.getDriverJoystick().getX() * -1;
+    	double forwardSpeed = Robot.oi.getDriverJoystick().getY() * power;
+    	double turningSpeed = Robot.oi.getDriverJoystick().getX() * power;
     	if (Math.abs(forwardSpeed) < minimumInput)
     		forwardSpeed = 0;
     	if (Math.abs(turningSpeed) < minimumInput)
