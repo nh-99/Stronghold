@@ -25,8 +25,8 @@ public class DriveTeleop extends Command {
 	public double rumbleTime = 0;
 	public boolean useHighPower = false;
 	public boolean aPressed = false;
-	public double highPower = -0.75;
-	public double lowPower = -0.4;
+	public double highPower = -1;
+	public double lowPower = -0.5;
 	public double power = lowPower;
 	public boolean wasPressed = false;
 	
@@ -72,13 +72,16 @@ public class DriveTeleop extends Command {
     		if (wasPressed) {
     			wasPressed = false;
 	    		useHighPower = !useHighPower;
-	    		if (useHighPower)
-	    			power = highPower;
-	    		else
-	    			power = lowPower;
+	    		rumbleTime = 25;
     		} else
     			wasPressed = true;
     	}
+    	if (Robot.oi.getDriverJoystick().getRawButton(6))
+    		power = (highPower + lowPower) / 2;
+    	else if (Robot.oi.getDriverJoystick().getRawButton(5))
+    		power = -1;
+    	else
+    		power = useHighPower ? highPower : lowPower;
     	if (aPressed && !Robot.oi.getDriverJoystick().getRawButton(1))
     		aPressed = false;
     	if (usingTankDrive) {
