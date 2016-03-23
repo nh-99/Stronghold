@@ -49,15 +49,15 @@ public class DriveTrain extends Subsystem {
         // Set the default command for a subsystem here.
         // setDefaultCommand(new MySpecialCommand());
     }
-    
+
     public void drive(double turningSpeed, double forwardSpeed) {
     	motors.arcadeDrive(forwardSpeed, turningSpeed);
     }
-    
+
     public void driveLeft(double speed) {
     	leftMotors.set(speed);
     }
-    
+
     public void driveRight(double speed) {
     	rightMotors.set(speed);
     }

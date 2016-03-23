@@ -46,15 +46,15 @@ public class Launcher extends Subsystem {
         // Set the default command for a subsystem here.
         // setDefaultCommand(new MySpecialCommand());
     }
-    
+
     public CANTalon getLaunchingMotor() {
     	return this.winchMotor;
     }
-    
+
     public SpeedController getReleaseMotor() {
     	return this.releaseMotor;
     }
-    
+
     public Encoder getWinchEncoder() {
     	return this.winchRotations;
     }
