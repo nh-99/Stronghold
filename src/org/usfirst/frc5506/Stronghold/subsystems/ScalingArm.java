@@ -47,9 +47,12 @@ public class ScalingArm extends Subsystem {
         // Set the default command for a subsystem here.
         // setDefaultCommand(new MySpecialCommand());
     }
-    
+
     public void extendArm(double speed) {
     	extendArm.set(speed);
+
+    public void rotateArm(double speed) {
+        rotateArm.set(speed);
     }
 }
 
