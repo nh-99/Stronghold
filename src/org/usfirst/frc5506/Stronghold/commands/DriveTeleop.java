@@ -20,14 +20,14 @@ import org.usfirst.frc5506.Stronghold.Robot;
  *
  */
 public class DriveTeleop extends Command {
-	public boolean usingTankDrive = false;
+	public boolean usingTankDrive = true;
 	public double holdTime = 0;
 	public double rumbleTime = 0;
 	public boolean useHighPower = false;
 	public boolean aPressed = false;
 	public double highPower = -1;
 	public double lowPower = -0.5;
-	public double power = highPower;
+	public double power = lowPower;
 	public boolean wasPressed = false;
 	
 	public double minimumInput = 0.03; // The joystick has a slight margin of error, never perfectly at 0
@@ -56,7 +56,55 @@ public class DriveTeleop extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	arcadeDrive();
+    	if (rumbleTime > 0)
+    		rumbleTime--;
+    	if (Robot.oi.getDriverJoystick().getRawButton(9) && Robot.oi.getDriverJoystick().getRawButton(10)) {
+    		holdTime++;
+    	} else {
+    		holdTime = 0;
+    	}
+    	if (holdTime == requiredHoldTime) {
+    		usingTankDrive = !usingTankDrive;
+    		rumbleTime = responseDuration;
+    	}
+    	if (Robot.oi.getDriverJoystick().getRawButton(1) && !aPressed) {
+    		aPressed = true;
+    		if (wasPressed) {
+    			wasPressed = false;
+	    		useHighPower = !useHighPower;
+	    		rumbleTime = 25;
+    		} else
+    			wasPressed = true;
+    	}
+    	if (Robot.oi.getDriverJoystick().getRawButton(6))
+    		power = (highPower + lowPower) / 2;
+    	else if (Robot.oi.getDriverJoystick().getRawButton(5))
+    		power = -1;
+    	else
+    		power = useHighPower ? highPower : lowPower;
+    	if (aPressed && !Robot.oi.getDriverJoystick().getRawButton(1))
+    		aPressed = false;
+    	if (usingTankDrive) {
+	    	float leftSpeed = (float) (Robot.oi.getDriverJoystick().getRawAxis(1) * -power);
+	    	float rightSpeed = (float) (Robot.oi.getDriverJoystick().getRawAxis(5) * -power);
+	    	tankDrive(leftSpeed, rightSpeed);
+	    	if (Math.abs(leftSpeed) >= minimumInput) {
+	    		Robot.driveTrain.driveLeft(leftSpeed);
+	    		rumble(Robot.oi.getDriverJoystick(), true, Math.abs(leftSpeed));
+	    	} else {
+	    		Robot.driveTrain.driveLeft(0);
+	    		rumble(Robot.oi.getDriverJoystick(), true, 0);
+	    	}
+	    	if(Math.abs(rightSpeed) >= minimumInput) {
+	    		Robot.driveTrain.driveRight(rightSpeed);
+	    		rumble(Robot.oi.getDriverJoystick(), false, Math.abs(rightSpeed));
+	    	} else {
+	    		Robot.driveTrain.driveRight(0);
+	    		rumble(Robot.oi.getDriverJoystick(), false, 0);
+	    	}
+    	} else {
+        	arcadeDrive();
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
