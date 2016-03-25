@@ -357,7 +357,7 @@ Children:
       Commands: !!robotbuilder.data.properties.ListProperty
         default: []
         name: Commands
-        validators: &id012 [List]
+        validators: &id011 [List]
         value:
         - !!robotbuilder.data.CommandGroupEntry
           command:
@@ -395,7 +395,7 @@ Children:
           command:
             base: *id008
             name: LauncherTeleop
-            properties: &id010
+            properties: &id009
               Parameters: !!robotbuilder.data.properties.ParametersProperty
                 default: []
                 name: Parameters
@@ -422,7 +422,7 @@ Children:
           command:
             base: *id008
             name: LoaderTeleop
-            properties: &id011
+            properties: &id010
               Parameters: !!robotbuilder.data.properties.ParametersProperty
                 default: []
                 name: Parameters
@@ -449,7 +449,7 @@ Children:
           command:
             base: *id008
             name: ScalingTeleop
-            properties: &id013
+            properties: &id012
               Parameters: !!robotbuilder.data.properties.ParametersProperty
                 default: []
                 name: Parameters
@@ -458,10 +458,10 @@ Children:
               Requires: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
                 name: Requires, type: Subsystem, validators: null, value: ScalingArm}
               Parameter presets: !!robotbuilder.data.properties.ParameterSetProperty
-                default: &id009 []
+                default: []
                 name: Parameter presets
                 validators: null
-                value: *id009
+                value: []
               Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {
                 default: true, name: Button on SmartDashboard, validators: null, value: true}
           hasMatch: true
@@ -477,11 +477,11 @@ Children:
     Base: Command Group
     Name: Teleop
   - Children: []
-    Properties: *id010
+    Properties: *id009
     Base: Command
     Name: LauncherTeleop
   - Children: []
-    Properties: *id011
+    Properties: *id010
     Base: Command
     Name: LoaderTeleop
   - Children: []
@@ -499,7 +499,7 @@ Children:
       Commands: !!robotbuilder.data.properties.ListProperty
         default: []
         name: Commands
-        validators: *id012
+        validators: *id011
         value: []
       Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
         name: Button on SmartDashboard, validators: null, value: true}
@@ -524,14 +524,32 @@ Children:
     Base: Command
     Name: DriveAuto
   - Children: []
-    Properties: *id013
+    Properties: *id012
     Base: Command
     Name: ScalingTeleop
+  - Children: []
+    Properties:
+      Parameters: !!robotbuilder.data.properties.ParametersProperty
+        default: []
+        name: Parameters
+        validators: null
+        value: []
+      Requires: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
+        name: Requires, type: Subsystem, validators: null, value: None}
+      Parameter presets: !!robotbuilder.data.properties.ParameterSetProperty
+        default: &id013 []
+        name: Parameter presets
+        validators: null
+        value: *id013
+      Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
+        name: Button on SmartDashboard, validators: null, value: false}
+    Base: Command
+    Name: SittingDuck
   Properties: {}
   Base: Commands
   Name: Commands
 Properties:
-  Eclipse Workspace: !!robotbuilder.data.properties.FileProperty {default: /Users/student/workspace,
+  Eclipse Workspace: !!robotbuilder.data.properties.FileProperty {default: /home/noah/workspace,
     extension: null, folder: true, name: Eclipse Workspace, validators: null, value: ../}
   Export Commands: !!robotbuilder.data.properties.BooleanProperty {default: true,
     name: Export Commands, validators: null, value: true}
@@ -550,7 +568,7 @@ Properties:
     name: Export Subsystems, validators: null, value: true}
   Simulation World File: !!robotbuilder.data.properties.StringProperty {default: /usr/share/frcsim/worlds/GearsBotDemo.world,
     name: Simulation World File, validators: null, value: /usr/share/frcsim/worlds/GearsBotDemo.world}
-  Wiring file location: !!robotbuilder.data.properties.FileProperty {default: /Users/student/,
+  Wiring file location: !!robotbuilder.data.properties.FileProperty {default: /home/noah/,
     extension: null, folder: true, name: Wiring file location, validators: null, value: ./}
   Autonomous Command: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
     name: Autonomous Command, type: Command, validators: null, value: AutonomousCommand}
