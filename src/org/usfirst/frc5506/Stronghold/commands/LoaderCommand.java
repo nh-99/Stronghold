@@ -42,6 +42,7 @@ public class LoaderCommand extends Command {
 
 	// Called just before this Command runs the first time
     protected void initialize() {
+    	setTimeout(1);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -51,7 +52,7 @@ public class LoaderCommand extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return isTimedOut();
     }
 
     // Called once after isFinished returns true

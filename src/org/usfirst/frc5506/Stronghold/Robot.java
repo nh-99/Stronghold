@@ -75,6 +75,8 @@ public class Robot extends IterativeRobot {
         autoChooser = new SendableChooser();
         autoChooser.addDefault("Sit there", new SittingDuck());
         autoChooser.addObject("Go forward", new AutonomousCommand());
+        autoChooser.addObject("Low bar", new LowBarAuto());
+        autoChooser.addObject("HIGH POWAR", new HighPowerDriveAuto());
         SmartDashboard.putData("Auto Routine Chooser", autoChooser);
     }
 
