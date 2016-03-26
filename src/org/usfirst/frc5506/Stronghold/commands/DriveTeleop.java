@@ -29,6 +29,8 @@ public class DriveTeleop extends Command {
 	public double lowPower = -0.5;
 	public double power = lowPower;
 	public boolean wasPressed = false;
+	public boolean arcadeOverride = false;
+	public boolean bPressed = false;
 
 	public double minimumInput = 0.03; // The joystick has a slight margin of error, never perfectly at 0
 	public byte requiredHoldTime = 50; // How long (x20ms) you need to hold down the buttons to switch drive mode
@@ -69,7 +71,7 @@ public class DriveTeleop extends Command {
 				Toggle between tank drive (default) and arcade drive
 				THE CONTROLLER WILL RUMBLE 100% BRIEFLY WHEN TOGGLED
 	*/
-	if (rumbleTime > 0)
+    	if (rumbleTime > 0)
     		rumbleTime--;
     	if (Robot.oi.getDriverJoystick().getRawButton(9) && Robot.oi.getDriverJoystick().getRawButton(10)) {
     		holdTime++;
@@ -89,6 +91,13 @@ public class DriveTeleop extends Command {
     		} else
     			wasPressed = true;
     	}
+    	if (Robot.oi.getDriverJoystick().getRawButton(2) && !bPressed) {
+    		bPressed = true;
+    		arcadeOverride = !arcadeOverride;
+    		rumbleTime = 25;
+    	} else if (bPressed && !Robot.oi.getDriverJoystick().getRawButton(2)) {
+    		aPressed = false;
+    	}
     	if (Robot.oi.getDriverJoystick().getRawButton(6))
     		power = (highPower + lowPower) / 2;
     	else if (Robot.oi.getDriverJoystick().getRawButton(5))
@@ -97,6 +106,11 @@ public class DriveTeleop extends Command {
     		power = useHighPower ? highPower : lowPower;
     	if (aPressed && !Robot.oi.getDriverJoystick().getRawButton(1))
     		aPressed = false;
+    	if (arcadeOverride) {
+    		power = -1;
+    		arcadeDrive();
+    		return;
+    	}
     	if (usingTankDrive) {
 	    	float leftSpeed = (float) (Robot.oi.getDriverJoystick().getRawAxis(1) * -power);
 	    	float rightSpeed = (float) (Robot.oi.getDriverJoystick().getRawAxis(5) * -power);
