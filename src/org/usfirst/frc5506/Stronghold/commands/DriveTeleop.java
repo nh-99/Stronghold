@@ -78,7 +78,9 @@ public class DriveTeleop extends Command {
 	*/
     	if (!extraFeatures) {
     		power = -0.5;
-    		arcadeDrive();
+    		float leftSpeed = (float) (Robot.oi.getDriverJoystick().getRawAxis(1) * -power);
+    		float rightSpeed = (float) (Robot.oi.getDriverJoystick().getRawAxis(5) * -power);
+    		tankDrive(leftSpeed, rightSpeed);
     		return;
     	}
     	if (rumbleTime > 0)
