@@ -31,6 +31,7 @@ public class DriveTeleop extends Command {
 	public boolean wasPressed = false;
 	public boolean arcadeOverride = false;
 	public boolean bPressed = false;
+	public boolean extraFeatures = false; // speed switches, arcade switches, etc
 
 	public double minimumInput = 0.03; // The joystick has a slight margin of error, never perfectly at 0
 	public byte requiredHoldTime = 50; // How long (x20ms) you need to hold down the buttons to switch drive mode
@@ -67,10 +68,19 @@ public class DriveTeleop extends Command {
 			A (double tap)
 				Toggle between a default speed of 50% and 100%
 				Starts at 50%
+			B (single tap)
+				Toggle between normal drive (whatever is toggled at that time)
+				to super-arcade (arcadeDrive at 100%)
+				Remembers previous configuration
 			(Hold both sticks for ~ 1 second)
 				Toggle between tank drive (default) and arcade drive
 				THE CONTROLLER WILL RUMBLE 100% BRIEFLY WHEN TOGGLED
 	*/
+    	if (!extraFeatures) {
+    		power = -0.5;
+    		arcadeDrive();
+    		return;
+    	}
     	if (rumbleTime > 0)
     		rumbleTime--;
     	if (Robot.oi.getDriverJoystick().getRawButton(9) && Robot.oi.getDriverJoystick().getRawButton(10)) {
