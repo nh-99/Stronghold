@@ -14,6 +14,8 @@ package org.usfirst.frc5506.Stronghold.commands;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Joystick.RumbleType;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import org.usfirst.frc5506.Stronghold.Robot;
 
 /**
@@ -76,6 +78,7 @@ public class DriveTeleop extends Command {
 				Toggle between tank drive (default) and arcade drive
 				THE CONTROLLER WILL RUMBLE 100% BRIEFLY WHEN TOGGLED
 	*/
+    	SmartDashboard.putNumber("j1 POV", Robot.oi.getFunctionJoystick().getPOV());
     	if (!extraFeatures) {
     		power = -0.5;
     		float leftSpeed = (float) (Robot.oi.getDriverJoystick().getRawAxis(1) * -power);
