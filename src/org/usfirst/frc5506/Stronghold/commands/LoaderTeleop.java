@@ -48,7 +48,7 @@ public class LoaderTeleop extends Command {
     		liftSpeed = Robot.oi.getFunctionJoystick().getRawAxis(1);
     		if (Math.abs(liftSpeed) > 1 / 3)
     			liftSpeed -= 1 / 3;
-    		if else
+    		else
     			liftSpeed = 0;
     	}
     	Robot.loader.getMotor().set(liftSpeed);
