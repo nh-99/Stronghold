@@ -28,12 +28,13 @@ public class DriveTeleop extends Command {
 	public boolean useHighPower = false;
 	public boolean aPressed = false;
 	public double highPower = -1;
-	public double lowPower = -0.5;
+	public double lowPower = -0.6;
 	public double power = lowPower;
 	public boolean wasPressed = false;
 	public boolean arcadeOverride = false;
 	public boolean bPressed = false;
-	public boolean extraFeatures = false; // speed switches, arcade switches, etc
+	public boolean extraFeatures = true; // speed switches, arcade switches, etc
+	public boolean funMode = true; // arcade with D-Pad
 
 	public double minimumInput = 0.03; // The joystick has a slight margin of error, never perfectly at 0
 	public byte requiredHoldTime = 50; // How long (x20ms) you need to hold down the buttons to switch drive mode
@@ -66,10 +67,10 @@ public class DriveTeleop extends Command {
 			Left Bumper
 				Set speed to 100% while pressed
 			Right Bumer
-				Set speed to 75% while pressed
+				Set speed to 80% while pressed
 			A (double tap)
-				Toggle between a default speed of 50% and 100%
-				Starts at 50%
+				Toggle between a default speed of 60% and 100%
+				Starts at 60%
 			B (single tap)
 				Toggle between normal drive (whatever is toggled at that time)
 				to super-arcade (arcadeDrive at 100%)
@@ -124,6 +125,10 @@ public class DriveTeleop extends Command {
     	if (arcadeOverride) {
     		power = -1;
     		arcadeDrive();
+    		return;
+    	}
+    	if (funMode && Robot.oi.getDriverJoystick().getPOV() != -1) {
+    		arcadePOV();
     		return;
     	}
     	if (usingTankDrive) {
@@ -199,6 +204,25 @@ public class DriveTeleop extends Command {
     	} else {
         	Robot.oi.getDriverJoystick().setRumble(RumbleType.kLeftRumble, (float) Math.abs(Robot.oi.getDriverJoystick().getY()));
         	Robot.oi.getDriverJoystick().setRumble(RumbleType.kRightRumble, (float) Math.abs(Robot.oi.getDriverJoystick().getY()));
+    	}
+    	Robot.driveTrain.drive(forwardSpeed, turningSpeed);
+    }
+
+    private void arcadePOV() {
+    	double x = Math.cos(Math.toRadians(Robot.oi.getDriverJoystick().getPOV() - 90)) * power;
+    	double y = Math.sin(Math.toRadians(Robot.oi.getDriverJoystick().getPOV() - 90)) * power;
+    	double forwardSpeed = y;
+    	double turningSpeed = x;
+    	if (Math.abs(forwardSpeed) < minimumInput)
+    		forwardSpeed = 0;
+    	if (Math.abs(turningSpeed) < minimumInput)
+    		turningSpeed = 0;
+    	if (Math.abs(x) > Math.abs(y)) {
+        	Robot.oi.getDriverJoystick().setRumble(RumbleType.kLeftRumble, (float) Math.abs(x));
+        	Robot.oi.getDriverJoystick().setRumble(RumbleType.kRightRumble, (float) Math.abs(x));
+    	} else {
+        	Robot.oi.getDriverJoystick().setRumble(RumbleType.kLeftRumble, (float) Math.abs(y));
+        	Robot.oi.getDriverJoystick().setRumble(RumbleType.kRightRumble, (float) Math.abs(y));
     	}
     	Robot.driveTrain.drive(forwardSpeed, turningSpeed);
     }

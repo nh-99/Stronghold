@@ -42,7 +42,7 @@ public class ScalingTeleop extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	boolean turretA = Robot.oi.getFunctionJoystick().getRawButton(9);
+    	/*boolean turretA = Robot.oi.getFunctionJoystick().getRawButton(9);
     	boolean turretB = Robot.oi.getFunctionJoystick().getRawButton(10);
     	boolean extend = Robot.oi.getFunctionJoystick().getRawButton(11);
     	boolean retract = Robot.oi.getFunctionJoystick().getRawButton(12);
@@ -57,7 +57,7 @@ public class ScalingTeleop extends Command {
     	if (retract)
     		extendSpeed -= (Robot.oi.getFunctionJoystick().getRawAxis(3) + 1) / 2;
     	Robot.scalingArm.setExtendSpeed(extendSpeed);
-    	Robot.scalingArm.setTurretSpeed(turretSpeed);
+    	Robot.scalingArm.setTurretSpeed(turretSpeed);*/
     }
 
     // Make this return true when this Command no longer needs to run execute()

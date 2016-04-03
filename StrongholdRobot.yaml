@@ -357,7 +357,7 @@ Children:
       Commands: !!robotbuilder.data.properties.ListProperty
         default: []
         name: Commands
-        validators: &id011 [List]
+        validators: &id010 [List]
         value:
         - !!robotbuilder.data.CommandGroupEntry
           command:
@@ -394,35 +394,8 @@ Children:
         - !!robotbuilder.data.CommandGroupEntry
           command:
             base: *id008
-            name: LauncherTeleop
-            properties: &id009
-              Parameters: !!robotbuilder.data.properties.ParametersProperty
-                default: []
-                name: Parameters
-                validators: null
-                value: []
-              Requires: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
-                name: Requires, type: Subsystem, validators: null, value: Launcher}
-              Parameter presets: !!robotbuilder.data.properties.ParameterSetProperty
-                default: []
-                name: Parameter presets
-                validators: null
-                value: []
-              Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {
-                default: true, name: Button on SmartDashboard, validators: null, value: true}
-          hasMatch: true
-          order: Parallel
-          parameters:
-            default: []
-            name: ParametersProperty
-            validators: null
-            value: []
-          previous: null
-        - !!robotbuilder.data.CommandGroupEntry
-          command:
-            base: *id008
             name: LoaderTeleop
-            properties: &id010
+            properties: &id009
               Parameters: !!robotbuilder.data.properties.ParametersProperty
                 default: []
                 name: Parameters
@@ -445,43 +418,30 @@ Children:
             validators: null
             value: []
           previous: null
-        - !!robotbuilder.data.CommandGroupEntry
-          command:
-            base: *id008
-            name: ScalingTeleop
-            properties: &id012
-              Parameters: !!robotbuilder.data.properties.ParametersProperty
-                default: []
-                name: Parameters
-                validators: null
-                value: []
-              Requires: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
-                name: Requires, type: Subsystem, validators: null, value: ScalingArm}
-              Parameter presets: !!robotbuilder.data.properties.ParameterSetProperty
-                default: []
-                name: Parameter presets
-                validators: null
-                value: []
-              Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {
-                default: true, name: Button on SmartDashboard, validators: null, value: true}
-          hasMatch: true
-          order: Parallel
-          parameters:
-            default: []
-            name: ParametersProperty
-            validators: null
-            value: []
-          previous: null
       Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
         name: Button on SmartDashboard, validators: null, value: true}
     Base: Command Group
     Name: Teleop
   - Children: []
-    Properties: *id009
+    Properties:
+      Parameters: !!robotbuilder.data.properties.ParametersProperty
+        default: []
+        name: Parameters
+        validators: null
+        value: []
+      Requires: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
+        name: Requires, type: Subsystem, validators: null, value: Launcher}
+      Parameter presets: !!robotbuilder.data.properties.ParameterSetProperty
+        default: []
+        name: Parameter presets
+        validators: null
+        value: []
+      Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
+        name: Button on SmartDashboard, validators: null, value: true}
     Base: Command
     Name: LauncherTeleop
   - Children: []
-    Properties: *id010
+    Properties: *id009
     Base: Command
     Name: LoaderTeleop
   - Children: []
@@ -499,14 +459,14 @@ Children:
       Commands: !!robotbuilder.data.properties.ListProperty
         default: []
         name: Commands
-        validators: *id011
+        validators: *id010
         value: []
       Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
         name: Button on SmartDashboard, validators: null, value: true}
     Base: Command Group
     Name: AutonomousCommand
   - Children: []
-    Properties: &id014
+    Properties: &id012
       Parameters: !!robotbuilder.data.properties.ParametersProperty
         default: []
         name: Parameters
@@ -524,7 +484,21 @@ Children:
     Base: Command
     Name: DriveAuto
   - Children: []
-    Properties: *id012
+    Properties:
+      Parameters: !!robotbuilder.data.properties.ParametersProperty
+        default: []
+        name: Parameters
+        validators: null
+        value: []
+      Requires: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
+        name: Requires, type: Subsystem, validators: null, value: ScalingArm}
+      Parameter presets: !!robotbuilder.data.properties.ParameterSetProperty
+        default: []
+        name: Parameter presets
+        validators: null
+        value: []
+      Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
+        name: Button on SmartDashboard, validators: null, value: true}
     Base: Command
     Name: ScalingTeleop
   - Children: []
@@ -560,10 +534,10 @@ Children:
       Commands: !!robotbuilder.data.properties.ListProperty
         default: []
         name: Commands
-        validators: *id011
+        validators: *id010
         value:
-        - &id016 !!robotbuilder.data.CommandGroupEntry
-          command: &id015
+        - &id014 !!robotbuilder.data.CommandGroupEntry
+          command: &id013
             base:
               help: A command specifies an action that the robot can perform.
               name: Command
@@ -578,14 +552,14 @@ Children:
                 validators: null
                 value: []
               - !!robotbuilder.data.properties.ParameterSetProperty
-                default: &id013 []
+                default: &id011 []
                 name: Parameter presets
                 validators: null
-                value: *id013
+                value: *id011
               supports: {}
               type: Command
             name: DriveAuto
-            properties: *id014
+            properties: *id012
           hasMatch: true
           order: Sequential
           parameters:
@@ -594,8 +568,8 @@ Children:
             validators: null
             value: []
           previous: null
-        - &id017 !!robotbuilder.data.CommandGroupEntry
-          command: *id015
+        - &id015 !!robotbuilder.data.CommandGroupEntry
+          command: *id013
           hasMatch: true
           order: Sequential
           parameters:
@@ -603,9 +577,9 @@ Children:
             name: ParametersProperty
             validators: null
             value: []
-          previous: *id016
+          previous: *id014
         - !!robotbuilder.data.CommandGroupEntry
-          command: *id015
+          command: *id013
           hasMatch: true
           order: Sequential
           parameters:
@@ -613,7 +587,7 @@ Children:
             name: ParametersProperty
             validators: null
             value: []
-          previous: *id017
+          previous: *id015
       Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
         name: Button on SmartDashboard, validators: null, value: true}
     Base: Command Group
@@ -626,15 +600,15 @@ Children:
         validators: null
         value: []
       Parameter presets: !!robotbuilder.data.properties.ParameterSetProperty
-        default: &id018 []
+        default: []
         name: Parameter presets
         validators: null
-        value: *id018
+        value: []
       Commands: !!robotbuilder.data.properties.ListProperty
-        default: &id019 []
+        default: []
         name: Commands
-        validators: *id011
-        value: *id019
+        validators: *id010
+        value: []
       Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
         name: Button on SmartDashboard, validators: null, value: true}
     Base: Command Group
@@ -643,7 +617,7 @@ Children:
   Base: Commands
   Name: Commands
 Properties:
-  Eclipse Workspace: !!robotbuilder.data.properties.FileProperty {default: 'C:\Users\Robotics\workspace',
+  Eclipse Workspace: !!robotbuilder.data.properties.FileProperty {default: /Users/student/workspace,
     extension: null, folder: true, name: Eclipse Workspace, validators: null, value: ../}
   Export Commands: !!robotbuilder.data.properties.BooleanProperty {default: true,
     name: Export Commands, validators: null, value: true}
@@ -662,7 +636,7 @@ Properties:
     name: Export Subsystems, validators: null, value: true}
   Simulation World File: !!robotbuilder.data.properties.StringProperty {default: /usr/share/frcsim/worlds/GearsBotDemo.world,
     name: Simulation World File, validators: null, value: /usr/share/frcsim/worlds/GearsBotDemo.world}
-  Wiring file location: !!robotbuilder.data.properties.FileProperty {default: 'C:\Users\Robotics\',
+  Wiring file location: !!robotbuilder.data.properties.FileProperty {default: /Users/student/,
     extension: null, folder: true, name: Wiring file location, validators: null, value: ./}
   Autonomous Command: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
     name: Autonomous Command, type: Command, validators: null, value: AutonomousCommand}

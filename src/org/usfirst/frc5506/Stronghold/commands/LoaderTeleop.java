@@ -12,6 +12,8 @@
 package org.usfirst.frc5506.Stronghold.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import org.usfirst.frc5506.Stronghold.Robot;
 
 /**
@@ -51,6 +53,7 @@ public class LoaderTeleop extends Command {
 				liftSpeed *= 1.5;
 		} else
 			liftSpeed = 0;
+		SmartDashboard.putNumber("Forklift Speed", liftSpeed);
     	Robot.loader.getMotor().set(liftSpeed);
     }
 
