@@ -46,14 +46,14 @@ public class LoaderTeleop extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
 		double liftSpeed = Robot.oi.getFunctionJoystick().getRawAxis(1);
-		double m = liftSpeed / Math.abs(liftSpeed);
+		/*double m = liftSpeed / Math.abs(liftSpeed);
 		if (Math.abs(liftSpeed) > 1 / 3) {
 			liftSpeed -= m * 1 / 3;
 			if (Robot.oi.getFunctionJoystick().getRawButton(1))
 				liftSpeed *= 1.5;
 		} else
 			liftSpeed = 0;
-		SmartDashboard.putNumber("Forklift Speed", liftSpeed);
+		SmartDashboard.putNumber("Forklift Speed", liftSpeed);*/
     	Robot.loader.getMotor().set(liftSpeed);
     }
 

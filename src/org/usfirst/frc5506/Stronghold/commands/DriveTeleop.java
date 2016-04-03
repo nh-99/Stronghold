@@ -209,22 +209,41 @@ public class DriveTeleop extends Command {
     }
 
     private void arcadePOV() {
-    	double x = Math.cos(Math.toRadians(Robot.oi.getDriverJoystick().getPOV() - 90)) * power;
-    	double y = Math.sin(Math.toRadians(Robot.oi.getDriverJoystick().getPOV() - 90)) * power;
-    	double forwardSpeed = y;
-    	double turningSpeed = x;
-    	if (Math.abs(forwardSpeed) < minimumInput)
-    		forwardSpeed = 0;
-    	if (Math.abs(turningSpeed) < minimumInput)
-    		turningSpeed = 0;
-    	if (Math.abs(x) > Math.abs(y)) {
-        	Robot.oi.getDriverJoystick().setRumble(RumbleType.kLeftRumble, (float) Math.abs(x));
-        	Robot.oi.getDriverJoystick().setRumble(RumbleType.kRightRumble, (float) Math.abs(x));
-    	} else {
-        	Robot.oi.getDriverJoystick().setRumble(RumbleType.kLeftRumble, (float) Math.abs(y));
-        	Robot.oi.getDriverJoystick().setRumble(RumbleType.kRightRumble, (float) Math.abs(y));
+    	int pov = Robot.oi.getDriverJoystick().getPOV();
+    	double corner = -0.75 * power;
+    	double left;
+    	double right;
+    	switch (pov) {
+    	case 0:
+    		left = -power;
+    		right = -power;
+    		break;
+    	case 45:
+    		left = corner;
+    		right = 0;
+    		break;
+    	case 90:
+    		left = -power;
+    		right = power;
+    	case 135:
+    		left = 0;
+    		right = -corner;
+    	case 180:
+    		left = power;
+    		right = power;
+    	case 225:
+    		left = -corner;
+    		right = 0;
+    	case 270:
+    		left = power;
+    		right = -power;
+    	case 315:
+    		left = 0;
+    		right = corner;
+    	case 360:
+    		left = -power;
+    		right = -power;
     	}
-    	Robot.driveTrain.drive(forwardSpeed, turningSpeed);
     }
 
     /**
