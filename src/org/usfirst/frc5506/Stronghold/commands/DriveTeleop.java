@@ -225,25 +225,40 @@ public class DriveTeleop extends Command {
     	case 90:
     		left = -power;
     		right = power;
+    		break;
     	case 135:
     		left = 0;
     		right = -corner;
+    		break;
     	case 180:
     		left = power;
     		right = power;
+    		break;
     	case 225:
     		left = -corner;
     		right = 0;
+    		break;
     	case 270:
     		left = power;
     		right = -power;
+    		break;
     	case 315:
     		left = 0;
     		right = corner;
+    		break;
     	case 360:
     		left = -power;
     		right = -power;
+    		break;
+    	default:
+    		left = 0;
+    		right = 0;
+    		break;
     	}
+    	rumble(Robot.oi.getDriverJoystick(), true, (float) left);
+    	rumble(Robot.oi.getDriverJoystick(), false, (float) right);
+    	Robot.driveTrain.driveLeft(left);
+    	Robot.driveTrain.driveRight(right);
     }
 
     /**
