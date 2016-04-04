@@ -35,6 +35,8 @@ public class DriveTeleop extends Command {
 	public boolean bPressed = false;
 	public boolean extraFeatures = true; // speed switches, arcade switches, etc
 	public boolean funMode = true; // arcade with D-Pad
+	public boolean j1Mode = false; // overwrites EVERYTHING and does secret stuff
+	// MAKE SURE TO SET `altControl` to `true` in `LoaderTeleop.java`
 
 	public double minimumInput = 0.03; // The joystick has a slight margin of error, never perfectly at 0
 	public byte requiredHoldTime = 50; // How long (x20ms) you need to hold down the buttons to switch drive mode
@@ -79,7 +81,10 @@ public class DriveTeleop extends Command {
 				Toggle between tank drive (default) and arcade drive
 				THE CONTROLLER WILL RUMBLE 100% BRIEFLY WHEN TOGGLED
 	*/
-    	SmartDashboard.putNumber("j1 POV", Robot.oi.getFunctionJoystick().getPOV());
+    	if (j1Mode) {
+    		useJ1();
+    		return;
+    	}
     	if (!extraFeatures) {
     		power = -0.5;
     		float leftSpeed = (float) (Robot.oi.getDriverJoystick().getRawAxis(1) * -power);
@@ -259,6 +264,23 @@ public class DriveTeleop extends Command {
     	rumble(Robot.oi.getDriverJoystick(), false, (float) right);
     	Robot.driveTrain.driveLeft(left);
     	Robot.driveTrain.driveRight(right);
+    }
+    
+    private void useJ1() {
+    	double forwardSpeed = Robot.oi.getFunctionJoystick().getY() * power;
+    	double turningSpeed = Robot.oi.getFunctionJoystick().getX() * power;
+    	if (Math.abs(forwardSpeed) < minimumInput)
+    		forwardSpeed = 0;
+    	if (Math.abs(turningSpeed) < minimumInput)
+    		turningSpeed = 0;
+    	if (Math.abs(Robot.oi.getFunctionJoystick().getX()) > Math.abs(Robot.oi.getFunctionJoystick().getY())) {
+        	Robot.oi.getDriverJoystick().setRumble(RumbleType.kLeftRumble, (float) Math.abs(Robot.oi.getFunctionJoystick().getX()));
+        	Robot.oi.getDriverJoystick().setRumble(RumbleType.kRightRumble, (float) Math.abs(Robot.oi.getFunctionJoystick().getX()));
+    	} else {
+        	Robot.oi.getDriverJoystick().setRumble(RumbleType.kLeftRumble, (float) Math.abs(Robot.oi.getFunctionJoystick().getY()));
+        	Robot.oi.getDriverJoystick().setRumble(RumbleType.kRightRumble, (float) Math.abs(Robot.oi.getFunctionJoystick().getY()));
+    	}
+    	Robot.driveTrain.drive(forwardSpeed, turningSpeed);
     }
 
     /**
