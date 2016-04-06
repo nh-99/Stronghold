@@ -24,6 +24,7 @@ import org.usfirst.frc5506.Stronghold.Robot;
 public class DriveTeleop extends Command {
 	public boolean usingTankDrive = true;
 	public double holdTime = 0;
+	public double xHoldTime = 0;
 	public double rumbleTime = 0;
 	public boolean useHighPower = false;
 	public boolean aPressed = false;
@@ -77,6 +78,8 @@ public class DriveTeleop extends Command {
 				Toggle between normal drive (whatever is toggled at that time)
 				to super-arcade (arcadeDrive at 100%)
 				Remembers previous configuration
+			X (hold 1 seconds)
+				Turn on a secret feature
 			(Hold both sticks for ~ 1 second)
 				Toggle between tank drive (default) and arcade drive
 				THE CONTROLLER WILL RUMBLE 100% BRIEFLY WHEN TOGGLED
@@ -91,6 +94,15 @@ public class DriveTeleop extends Command {
     		float rightSpeed = (float) (Robot.oi.getDriverJoystick().getRawAxis(5) * -power);
     		tankDrive(leftSpeed, rightSpeed);
     		return;
+    	}
+    	if (Robot.oi.getFunctionJoystick().getRawButton(3))
+    		holdTime++;
+    	if (!Robot.oi.getFunctionJoystick().getRawButton(3))
+    		holdTime = 0;
+    	if (holdTime == requiredHoldTime) {
+    		holdTime = 0;
+    		j1Mode = !j1Mode;
+    		rumbleTime = responseDuration;
     	}
     	if (rumbleTime > 0)
     		rumbleTime--;
