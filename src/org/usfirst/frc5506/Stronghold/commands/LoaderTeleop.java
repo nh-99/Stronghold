@@ -68,6 +68,8 @@ public class LoaderTeleop extends Command {
 		} else
 			liftSpeed = 0;
 		SmartDashboard.putNumber("Forklift Speed", liftSpeed);*/
+		if (!Robot.oi.getFunctionJoystick().getRawButton(1))
+			liftSpeed *= 0.6
     	Robot.loader.getMotor().set(liftSpeed);
     }
 
