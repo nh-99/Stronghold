@@ -227,45 +227,45 @@ public class DriveTeleop extends Command {
 
     private void arcadePOV() {
     	int pov = Robot.oi.getDriverJoystick().getPOV();
-    	double corner = -0.75 * power;
+    	double corner = 0.75 * power;
     	double left;
     	double right;
     	switch (pov) {
     	case 0:
-    		left = -power;
-    		right = -power;
+    		left = power;
+    		right = power;
     		break;
     	case 45:
     		left = corner;
     		right = 0;
     		break;
     	case 90:
-    		left = -power;
-    		right = power;
+    		left = power;
+    		right = -power;
     		break;
     	case 135:
     		left = 0;
-    		right = -corner;
+    		right = corner;
     		break;
     	case 180:
-    		left = power;
-    		right = power;
+    		left = -power;
+    		right = -power;
     		break;
     	case 225:
-    		left = -corner;
+    		left = corner;
     		right = 0;
     		break;
     	case 270:
-    		left = power;
-    		right = -power;
+    		left = -power;
+    		right = power;
     		break;
     	case 315:
     		left = 0;
     		right = corner;
     		break;
     	case 360:
-    		left = -power;
-    		right = -power;
+    		left = power;
+    		right = power;
     		break;
     	default:
     		left = 0;
