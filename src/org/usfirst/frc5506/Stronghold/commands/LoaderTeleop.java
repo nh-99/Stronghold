@@ -64,7 +64,7 @@ public class LoaderTeleop extends Command {
     			liftSpeed -= 90;
     			liftSpeed = liftSpeed / Math.abs(liftSpeed);
     			if (!Robot.oi.getFunctionJoystick().getRawButton(1))
-    				liftSpeed *= 0.8;
+    				liftSpeed *= 0.78;
     		}
     		Robot.loader.getMotor().set(liftSpeed);
     		return;
@@ -79,7 +79,7 @@ public class LoaderTeleop extends Command {
 			liftSpeed = 0;
 		SmartDashboard.putNumber("Forklift Speed", liftSpeed);*/
 		if (!Robot.oi.getFunctionJoystick().getRawButton(1))
-			liftSpeed *= 0.8;
+			liftSpeed *= 0.7;
     	Robot.loader.getMotor().set(liftSpeed);
     }
 
