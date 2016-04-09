@@ -107,7 +107,7 @@ public class DriveTeleop extends Command {
     	if (rumbleTime > 0)
     		rumbleTime--;
     	if (Robot.oi.getDriverJoystick().getRawButton(9) && Robot.oi.getDriverJoystick().getRawButton(10)) {
-    		holdTime++;
+    		//holdTime++;
     	} else {
     		holdTime = 0;
     	}
@@ -124,13 +124,13 @@ public class DriveTeleop extends Command {
     		} else
     			wasPressed = true;
     	}
-    	if (Robot.oi.getDriverJoystick().getRawButton(2) && !bPressed) {
+    	/*if (Robot.oi.getDriverJoystick().getRawButton(2) && !bPressed) {
     		bPressed = true;
     		arcadeOverride = !arcadeOverride;
     		rumbleTime = 25;
     	} else if (bPressed && !Robot.oi.getDriverJoystick().getRawButton(2)) {
     		aPressed = false;
-    	}
+    	}*/
     	if (Robot.oi.getDriverJoystick().getRawButton(6))
     		power = (highPower + lowPower) / 2;
     	else if (Robot.oi.getDriverJoystick().getRawButton(5))
@@ -152,7 +152,7 @@ public class DriveTeleop extends Command {
 	    	float leftSpeed = (float) (Robot.oi.getDriverJoystick().getRawAxis(1) * -power);
 	    	float rightSpeed = (float) (Robot.oi.getDriverJoystick().getRawAxis(5) * -power);
 	    	tankDrive(leftSpeed, rightSpeed);
-	    	if (Math.abs(leftSpeed) >= minimumInput) {
+	    	/*if (Math.abs(leftSpeed) >= minimumInput) {
 	    		Robot.driveTrain.driveLeft(leftSpeed);
 	    		rumble(Robot.oi.getDriverJoystick(), true, Math.abs(leftSpeed));
 	    	} else {
@@ -165,7 +165,7 @@ public class DriveTeleop extends Command {
 	    	} else {
 	    		Robot.driveTrain.driveRight(0);
 	    		rumble(Robot.oi.getDriverJoystick(), false, 0);
-	    	}
+	    	}*/
     	} else {
         	arcadeDrive();
     	}
@@ -226,6 +226,7 @@ public class DriveTeleop extends Command {
     }
 
     private void arcadePOV() {
+    	power = -0.5 * Robot.oi.getDriverJoystick().getRawAxis(3) - 0.5;
     	int pov = Robot.oi.getDriverJoystick().getPOV();
     	double corner = 0.75 * power;
     	double left;
