@@ -73,12 +73,13 @@ public class Robot extends IterativeRobot {
         server = CameraServer.getInstance();
         server.setQuality(50);
         server.startAutomaticCapture("cam0");
+        server.startAutomaticCapture("cam1");
         
         autoChooser = new SendableChooser();
         autoChooser.addDefault("Sit there", new SittingDuck());
         autoChooser.addObject("Go forward", new AutonomousCommand());
         autoChooser.addObject("Low bar", new LowBarAuto());
-        autoChooser.addObject("HIGH POWAR", new HighPowerDriveAuto());
+        autoChooser.addObject("GO HAM!", new HighPowerDriveAuto());
         SmartDashboard.putData("Auto Routine Chooser", autoChooser);
     }
 

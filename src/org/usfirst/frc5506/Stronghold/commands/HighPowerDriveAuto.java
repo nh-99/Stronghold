@@ -40,10 +40,8 @@ public class HighPowerDriveAuto extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-        addSequential(new DriveAuto(0.9, 0, 2));
+        addSequential(new DriveAuto(1, 0, 2));
         addSequential(new DriveAuto(0, 0.75, 0.2));
-        addSequential(new DriveAuto(0.9, 0, 3));
-
- 
+        addSequential(new DriveAuto(1, 0, 1));
     } 
 }

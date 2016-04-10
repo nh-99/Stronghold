@@ -226,7 +226,7 @@ public class DriveTeleop extends Command {
     }
 
     private void arcadePOV() {
-    	power = -0.5 * Robot.oi.getDriverJoystick().getRawAxis(3) - 0.5;
+    	power = -0.5 * Robot.oi.getDriverJoystick().getRawAxis(3) - 0.5 - 0.2 * Robot.oi.getDriverJoystick().getRawAxis(2);
     	int pov = Robot.oi.getDriverJoystick().getPOV();
     	double corner = 0.75 * power;
     	double left;
